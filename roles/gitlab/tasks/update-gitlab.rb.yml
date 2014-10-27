@@ -1,0 +1,5 @@
+---
+- name: update gitlab.rb
+  lineinfile: dest=/etc/gitlab/gitlab.rb
+              regexp=^external_url
+              line="external_url 'http://192.168.33.10/'"

@@ -1,0 +1,20 @@
+---
+- name: installed gitlab?
+  shell: dpkg --get-selections | grep gitlab
+  register: installed_gitlab
+
+- name: download gitlab
+  get_url: url=https://downloads-packages.s3.amazonaws.com/ubuntu-14.04/gitlab_7.4.2-omnibus-1_amd64.deb
+           dest=/tmp/gitlab_7.4.2-omnibus-1_amd64.deb
+           mode=0644
+  when: installed_gitlab|failed
+
+- name: install gitlab from package
+  apt: deb=/tmp/gitlab_7.4.2-omnibus-1_amd64.deb
+  when: installed_gitlab|failed
+
+- name: remove package
+  file: path=/tmp/gitlab_7.4.2-omnibus-1_amd64.deb
+        state=absent
+  when: installed_gitlab|failed
+

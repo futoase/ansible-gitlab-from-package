@@ -1,0 +1,5 @@
+---
+- include: setup.yml
+- include: install.yml
+- include: update-gitlab.rb.yml
+- include: reconfigure.yml

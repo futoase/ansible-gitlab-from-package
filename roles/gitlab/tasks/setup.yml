@@ -1,0 +1,8 @@
+---
+- name: setup require package for gitlab
+  apt: name={{ item }}
+       state=latest
+  with_items:
+    - openssh-server
+    - postfix
+
